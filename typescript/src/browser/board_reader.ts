@@ -102,36 +102,37 @@ async function readGoogleBoard(page: Page): Promise<BoardState> {
 
 async function readMSOBoard(page: Page): Promise<BoardState> {
   return page.evaluate(() => {
-    const cells = Array.from(document.querySelectorAll('#game .square, #game td, .square, div[class*="square"]')) as HTMLElement[];
+    // minesweeperonline.com uses div elements with id="row_col" (e.g. "1_1")
+    const allDivs = Array.from(document.querySelectorAll('#game div[id]')) as HTMLElement[];
+    const cells = allDivs
+      .filter(d => /^\d+_\d+$/.test(d.id))
+      .sort((a, b) => {
+        const [ar, ac] = a.id.split('_').map(Number);
+        const [br, bc] = b.id.split('_').map(Number);
+        return ar !== br ? ar - br : ac - bc;
+      });
+
     if (cells.length === 0) return { width: 0, height: 0, totalMines: 0, cells: [], gameStatus: 'idle' as const };
 
-    let width = 9;
-    let height = 9;
-    let totalMines = 10;
-
-    if (cells.length === 480) {
-      width = 30;
-      height = 16;
-      totalMines = 99;
-    } else if (cells.length === 256) {
-      width = 16;
-      height = 16;
-      totalMines = 40;
-    } else if (cells.length === 81) {
-      width = 9;
-      height = 9;
-      totalMines = 10;
-    } else {
-      const rows = document.querySelectorAll('#game tr').length;
-      if (rows > 0) {
-        height = rows;
-        width = Math.floor(cells.length / rows);
-      } else {
-        width = Math.round(Math.sqrt(cells.length));
-        height = Math.ceil(cells.length / width);
-      }
-      totalMines = Math.max(1, Math.round(cells.length * 0.15));
+    // Derive width/height from max row/col in ids
+    let maxRow = 0, maxCol = 0;
+    for (const d of cells) {
+      const [r, c] = d.id.split('_').map(Number);
+      if (r > maxRow) maxRow = r;
+      if (c > maxCol) maxCol = c;
     }
+    const width = maxCol;
+    const height = maxRow;
+
+    // Mine count from digit display divs
+    const digit = (id: string) => {
+      const el = document.querySelector(`#${id}`) as HTMLElement | null;
+      if (!el) return 0;
+      const m = el.className.match(/time(\d)/);
+      return m ? parseInt(m[1], 10) : 0;
+    };
+    const totalMines = digit('mines_hundreds') * 100 + digit('mines_tens') * 10 + digit('mines_ones')
+      || (width === 9 ? 10 : width === 16 ? 40 : 99);
 
     const cellData = cells.map(td => {
       const cls = td.className || '';

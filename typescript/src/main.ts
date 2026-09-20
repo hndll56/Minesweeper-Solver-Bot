@@ -46,7 +46,8 @@ async function main(): Promise<void> {
 
   try {
     await browserManager.page.goto(url, { waitUntil: 'domcontentloaded' });
-    await browserManager.page.waitForTimeout(1500);
+    await browserManager.page.waitForSelector('#game div.square', { timeout: 10000 }).catch(() => {});
+    await browserManager.page.waitForTimeout(500);
 
     const adapter = new GameAdapter(browserManager.page);
     const rustClient = new RustClient(solverPath);

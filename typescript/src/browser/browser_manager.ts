@@ -9,9 +9,12 @@ export class BrowserManager {
   async launch(): Promise<void> {
     this.browser = await chromium.launch({
       executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-      channel: 'chrome',
       headless: this.headless,
-      args: ['--no-sandbox'],
+      args: [
+        '--no-sandbox',
+        '--disable-blink-features=AutomationControlled',
+        '--disable-infobars',
+      ],
     });
     this._page = await this.browser.newPage();
   }

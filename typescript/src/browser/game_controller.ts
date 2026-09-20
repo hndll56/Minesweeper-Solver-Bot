@@ -76,7 +76,7 @@ export class GameController {
     }
 
     // Generic: get all cell elements and pick by index
-    const cells = await this.page.$$('[aria-label*="mine" i], [aria-label*="blank" i], [aria-label*="flag" i], td.blank, td[class^="open"], td.bombflagged');
+    const cells = await this.page.$$('[aria-label*="mine" i], [aria-label*="blank" i], [aria-label*="flag" i], div.blank, div[class^="open"], div.bombflagged');
     if (cells[index]) {
       const box = await cells[index].boundingBox();
       if (box) return { x: box.x + box.width / 2, y: box.y + box.height / 2 };

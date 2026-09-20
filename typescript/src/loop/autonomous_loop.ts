@@ -86,11 +86,11 @@ export class AutonomousLoop {
         if (response.is_guess) this.guessesThisGame++;
 
         // 6. Execute returned actions
-        for (const action of response.actions) {
+        for (const action of response.actions || []) {
           if (action.type === 'click') {
-            await this.gameAdapter.clickCell(action.index);
+            await this.gameAdapter.clickCell(action.cell);
           } else if (action.type === 'flag') {
-            await this.gameAdapter.flagCell(action.index);
+            await this.gameAdapter.flagCell(action.cell);
           }
           this.actionsThisGame++;
         }

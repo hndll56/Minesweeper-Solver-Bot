@@ -12,13 +12,14 @@ export interface BoardState {
 }
 
 export interface SolveAction {
-  type: 'click' | 'flag';
-  index: number;
+  type: 'click' | 'flag' | 'chord';
+  cell: number;
 }
 
 export interface SolveResponse {
   request_id: string;
-  actions: SolveAction[];
-  is_guess: boolean;
+  status: string;
+  actions?: SolveAction[];
+  is_guess?: boolean;
   confidence?: number;
 }
