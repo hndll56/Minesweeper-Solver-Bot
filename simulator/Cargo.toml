@@ -1,0 +1,8 @@
+[package]
+name = "minesweeper-simulator"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "minesweeper-sim"
+path = "src/main.rs"

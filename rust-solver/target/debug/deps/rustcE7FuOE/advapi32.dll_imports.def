@@ -1,0 +1,15 @@
+EXPORTS
+CloseEncryptedFileRaw
+DecryptFileA
+DecryptFileW
+EncryptFileA
+EncryptFileW
+EncryptionDisable
+FileEncryptionStatusA
+FileEncryptionStatusW
+FreeEncryptedFileMetadata
+GetEncryptedFileMetadata
+OpenEncryptedFileRawA
+OpenEncryptedFileRawW
+ReadEncryptedFileRaw
+WriteEncryptedFileRaw

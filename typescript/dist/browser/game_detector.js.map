@@ -1,0 +1,1 @@
+{"version":3,"file":"game_detector.js","sourceRoot":"","sources":["../../src/browser/game_detector.ts"],"names":[],"mappings":";;AAIA,gCAKC;AALM,KAAK,UAAU,UAAU,CAAC,IAAU;IACzC,MAAM,GAAG,GAAG,IAAI,CAAC,GAAG,EAAE,CAAC;IACvB,IAAI,GAAG,CAAC,QAAQ,CAAC,YAAY,CAAC;QAAE,OAAO,QAAQ,CAAC;IAChD,IAAI,GAAG,CAAC,QAAQ,CAAC,uBAAuB,CAAC;QAAE,OAAO,mBAAmB,CAAC;IACtE,OAAO,SAAS,CAAC;AACnB,CAAC"}

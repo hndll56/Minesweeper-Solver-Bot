@@ -1,0 +1,1 @@
+{"version":3,"file":"board_reader.d.ts","sourceRoot":"","sources":["../../src/browser/board_reader.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,IAAI,EAAE,MAAM,YAAY,CAAC;AAClC,OAAO,EAAE,UAAU,EAAY,MAAM,UAAU,CAAC;AAChD,OAAO,EAAE,QAAQ,EAAE,MAAM,iBAAiB,CAAC;AAyB3C,wBAAsB,SAAS,CAAC,IAAI,EAAE,IAAI,EAAE,QAAQ,EAAE,QAAQ,GAAG,OAAO,CAAC,UAAU,CAAC,CAInF"}
